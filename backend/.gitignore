@@ -1,0 +1,39 @@
+# --- Python / Virtual Environments ---
+venv/
+env/
+.env
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# --- Django Specific ---
+db.sqlite3
+db.sqlite3-journal
+local_settings.py
+staticfiles/
+media/
+
+# --- PostgreSQL / Database ---
+# (Usually, you don't store PG data in the repo, but just in case)
+*.sql
+*.dump
+
+# --- Environment Variables (CRITICAL: Do not commit secrets) ---
+.env
+.venv
+env.bak
+*.env
+
+# --- IDEs / Editors ---
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# --- Logs and Runtime ---
+*.log
+pip-log.txt
+pip-delete-this-directory.txt
