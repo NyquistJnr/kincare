@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -82,11 +86,11 @@ WSGI_APPLICATION = 'kincare_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'kincare_db',       # Update with your local DB name
-        'USER': 'postgres',         # Update with your DB user
-        'PASSWORD': 'password',     # Update with your DB password
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME', 'kincare_db'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'password'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
@@ -131,13 +135,34 @@ AUTH_USER_MODEL = 'accounts.User'
 
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
 }
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'KinCare API',
     'DESCRIPTION': 'API for the KinCare Health Payment Platform',
     'VERSION': '1.0.0',
+    'SECURITY': [{'jwtAuth': []}],
+    'COMPONENTS': {
+        'securitySchemes': {
+            'jwtAuth': {
+                'type': 'http',
+                'scheme': 'bearer',
+                'bearerFormat': 'JWT',
+            }
+        }
+    },
+    'SWAGGER_UI_SETTINGS': {
+        'docExpansion': 'none', 
+        'defaultModelsExpandDepth': -1,
+    },
 }
 
 # QStash Token (Store this in a .env file later)
 QSTASH_TOKEN = os.getenv('QSTASH_TOKEN', 'your-upstash-token-here')
+
+INTERSWITCH_CLIENT_ID = os.getenv('INTERSWITCH_CLIENT_ID')
+INTERSWITCH_SECRET_KEY = os.getenv('INTERSWITCH_SECRET_KEY')
+INTERSWITCH_ENV = os.getenv('INTERSWITCH_ENV', 'SANDBOX')
