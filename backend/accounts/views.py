@@ -25,21 +25,25 @@ client = QStash(token=qstash_token) if qstash_token else None
 class DiasporaSignUpView(APIView):
     serializer_class = DiasporaSignupSerializer
 
-    @extend_schema(
-        summary="Sign Up", 
-        description="Creates an Account of any USER TYPE: DIASPORA_MEMBER and FAMILY_MEMBER", 
-        tags=["Authentication"], 
-    )
+    @extend_schema(summary="Sign Up", tags=["Authentication"])
     def post(self, request):
         serializer = DiasporaSignupSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
             return Response({
+                "success": True,
                 "message": "Diaspora Member created successfully",
-                "user_id": user.id,
-                "tenant_id": user.tenant.id
+                "data": {
+                    "user_id": user.id,
+                    "tenant_id": user.tenant.id
+                }
             }, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            
+        return Response({
+            "success": False,
+            "message": "Validation failed",
+            "data": serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 class TransactionPinView(APIView):
     permission_classes = [IsAuthenticated]
@@ -68,7 +72,6 @@ class KycSubmissionView(APIView):
         if serializer.is_valid():
             bvn = serializer.validated_data['bvn']
             phone_number = serializer.validated_data['phone_number']
-            
             interswitch = InterswitchService()
             verification_result = interswitch.verify_bvn(bvn)
             
@@ -78,15 +81,24 @@ class KycSubmissionView(APIView):
                 user.save()
                 
                 return Response({
+                    "success": True,
                     "message": "KYC verified successfully via Interswitch.",
-                    "is_kyc_verified": True
+                    "data": {
+                        "is_kyc_verified": True
+                    }
                 }, status=status.HTTP_200_OK)
             else:
                 return Response({
-                    "error": verification_result.get("error", "BVN Verification failed.")
+                    "success": False,
+                    "message": verification_result.get("error", "BVN Verification failed."),
+                    "data": None
                 }, status=status.HTTP_400_BAD_REQUEST)
                 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({
+            "success": False,
+            "message": "Invalid input data",
+            "data": serializer.errors
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 class GeneratePairingCodeView(APIView):
     permission_classes = [IsAuthenticated]

@@ -138,6 +138,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'EXCEPTION_HANDLER': 'kincare_backend.exceptions.standardized_exception_handler',
 }
 
 SPECTACULAR_SETTINGS = {
