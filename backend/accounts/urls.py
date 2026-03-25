@@ -11,7 +11,7 @@ from .views import (
 
 urlpatterns = [
     path('login/', UniversalLoginView.as_view(), name='universal_login'),
-    path('login/refresh/', CustomTokenRefreshView.as_view(), name='token_refresh'),
+    path('refresh/', CustomTokenRefreshView.as_view(), name='token_refresh'),
     path('diaspora/signup/', DiasporaSignUpView.as_view(), name='diaspora-signup'),
     path('diaspora/pin/', TransactionPinView.as_view(), name='diaspora-pin'),
     path('diaspora/kyc/', KycSubmissionView.as_view(), name='diaspora-kyc'),
