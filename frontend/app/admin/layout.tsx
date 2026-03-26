@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Sidebar from "@/components/diaspora-dashboard/generics/SideBar";
+import Sidebar from "@/components/admin-dashboard/generics/SideBar";
 
 // Configure the font
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "KinCare Diaspora Dashboard",
+  title: "KinCare Admin Dashboard",
   description: "Manage your health wealth balance and claims with KinCare.",
 };
 
@@ -22,7 +22,7 @@ export default function RootLayout({
         <div className="flex h-screen w-full overflow-hidden">
           
           {/* Sidebar - Fixed width, full height */}
-          <div className="w-64 shrink-0 h-full">
+          <div className="w-64 flex-shrink-0 h-full">
             <Sidebar />
           </div>
 
