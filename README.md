@@ -30,7 +30,7 @@ layer that flags suspicious invoices before any payment is approved.
 
 - Allows diaspora members to pre-fund a wallet dedicated solely to medical 
   emergencies
-- Ensures payment goes directly to the hospital — money never touches the 
+- Ensures payment goes directly to the hospital. Money never touches the 
   family member's hands
 - Enables instant settlement to any Nigerian hospital bank account via 
   Interswitch
@@ -60,19 +60,19 @@ layer that flags suspicious invoices before any payment is approved.
 
 ## Key Features
 
-- **Pre-funded health wallet** — money set aside before emergencies happen, 
+- **Pre-funded health wallet**: money set aside before emergencies happen, 
   not after
-- **Direct hospital settlement** — Interswitch transfers funds straight to the 
+- **Direct hospital settlement**: Interswitch transfers funds straight to the 
   hospital's bank account
-- **AI bill anomaly detection** — flags invoices that are statistical outliers 
+- **AI bill anomaly detection**: flags invoices that are statistical outliers 
   before approval
-- **Claim approval intelligence** — plain-English AI brief shown to diaspora 
+- **Claim approval intelligence**: plain-English AI brief shown to diaspora 
   member at the approval screen
-- **Auto-approval rules** — configurable fallback so emergencies are covered 
+- **Auto-approval rules**: configurable fallback so emergencies are covered 
   even when the diaspora member is unreachable
-- **Pairing code family linking** — diaspora member generates a unique code; 
+- **Pairing code family linking**: diaspora member generates a unique code; 
   family member uses it to connect to the wallet in minutes
-- **Account name verification** — Interswitch resolves hospital account numbers 
+- **Account name verification**: Interswitch resolves hospital account numbers 
   to verified account names before any payment moves
 
 ---
@@ -81,10 +81,10 @@ layer that flags suspicious invoices before any payment is approved.
 
 *(To be completed by development team)*
 
-- **Frontend:** [Framework]
-- **Backend:** [Language / Framework]
-- **Database:** [Database]
-- **Hosting:** [Platform — Vercel / Netlify / AWS]
+- **Frontend:** NextJs, Tailwind CSS, Typescript
+- **Backend:** Django, Python
+- **Database:** Postgres DB
+- **Hosting:** Vercel
 
 ---
 
