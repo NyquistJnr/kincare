@@ -1,7 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
 import { 
-  Bell, 
   ArrowRight, 
   CheckCircle2, 
   AlertTriangle, 
@@ -13,32 +11,8 @@ import {
 export default function AdminDashboardPage() {
   return (
     <div className="flex-1 min-h-screen bg-[#F8F9FA] text-[#252A3A] font-sans">
-      {/* Top Header */}
-      <header className="flex items-center justify-between px-8 py-6 bg-white border-b border-gray-100">
-        <h1 className="text-xl font-bold">System Overview</h1>
-        
-        <div className="flex items-center gap-6">
-          {/* Notification Icon */}
-          <div className="relative p-2 bg-[#FFF4E5] rounded-lg cursor-pointer">
-            <Bell className="w-5 h-5 text-[#F59E1A]" />
-            <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#E5484D] rounded-full"></span>
-          </div>
-
-          {/* User Profile */}
-          <div className="flex items-center gap-3 cursor-pointer">
-            <div className="w-10 h-10 rounded-full bg-[#F59E1A] flex items-center justify-center text-white font-bold tracking-wide shadow-sm">
-              CO
-            </div>
-            <div>
-              <p className="text-sm font-bold">Chidi Okafor</p>
-              <p className="text-xs text-gray-500">System Admin</p>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content */}
-      <main className="p-8 max-w-[1400px] mx-auto space-y-6">
+      <main className="p-4 sm:p-8 max-w-[1400px] mx-auto space-y-6">
         
         {/* Page Header & System Status */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-2">
@@ -63,22 +37,22 @@ export default function AdminDashboardPage() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
             <p className="text-[10px] font-bold text-gray-400 tracking-wider mb-2 uppercase">Total Users</p>
-            <p className="text-4xl font-bold text-[#252A3A]">247</p>
+            <p className="text-2xl sm:text-4xl font-bold text-[#252A3A]">247</p>
             <p className="text-[10px] font-bold text-[#00A859] mt-3 uppercase tracking-wide">↑ 12 This Week</p>
           </div>
           <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
             <p className="text-[10px] font-bold text-gray-400 tracking-wider mb-2 uppercase">Total Wallet Value</p>
-            <p className="text-4xl font-bold text-[#252A3A]">₦42.8M</p>
+            <p className="text-2xl sm:text-4xl font-bold text-[#252A3A]">₦42.8M</p>
             <p className="text-[10px] font-bold text-[#00A859] mt-3 uppercase tracking-wide">↑ ₦3.1M Today</p>
           </div>
           <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
             <p className="text-[10px] font-bold text-gray-400 tracking-wider mb-2 uppercase">Claims Processed</p>
-            <p className="text-4xl font-bold text-[#252A3A]">1,084</p>
+            <p className="text-2xl sm:text-4xl font-bold text-[#252A3A]">1,084</p>
             <p className="text-[10px] font-bold text-[#00A859] mt-3 uppercase tracking-wide">↑ 28 Today</p>
           </div>
           <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
             <p className="text-[10px] font-bold text-gray-400 tracking-wider mb-2 uppercase">Total Disbursed</p>
-            <p className="text-4xl font-bold text-[#252A3A]">₦18.4M</p>
+            <p className="text-2xl sm:text-4xl font-bold text-[#252A3A]">₦18.4M</p>
             <p className="text-[10px] font-bold text-[#00A859] mt-3 uppercase tracking-wide">100% Settled</p>
           </div>
         </div>

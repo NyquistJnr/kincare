@@ -1,7 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
 import { 
-  Bell, 
   Download, 
   Search, 
   ArrowLeft, 
@@ -13,38 +11,8 @@ import {
 export default function Claims() {
   return (
     <div className="flex-1 min-h-screen bg-[#F8F9FA] text-[#252A3A] font-sans">
-      {/* Top Header */}
-      <header className="flex items-center justify-between px-8 py-6 bg-white border-b border-gray-100">
-        <h1 className="text-xl font-bold">Claim</h1>
-        
-        <div className="flex items-center gap-6">
-          {/* Notification Icon */}
-          <div className="relative p-2 bg-[#FFF4E5] rounded-lg cursor-pointer">
-            <Bell className="w-5 h-5 text-[#F59E1A]" />
-            <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#F59E1A] rounded-full border-2 border-white"></span>
-          </div>
-
-          {/* User Profile */}
-          <div className="flex items-center gap-3 cursor-pointer">
-            <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden relative">
-              <Image 
-                src="/images/profile.jpg" 
-                alt="Ifunanya Obi" 
-                layout="fill" 
-                objectFit="cover"
-                unoptimized
-              />
-            </div>
-            <div>
-              <p className="text-sm font-bold">Ifunanya Obi</p>
-              <p className="text-xs text-gray-500">Diaspora · Manchester</p>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content */}
-      <main className="p-8 max-w-[1400px] mx-auto space-y-8">
+      <main className="p-4 sm:p-8 max-w-[1400px] mx-auto space-y-8">
         
         {/* Page Header & Export Action */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -83,25 +51,25 @@ export default function Claims() {
         </div>
 
         {/* Filters and Search */}
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-4">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
           {/* Pills */}
-          <div className="flex flex-wrap items-center gap-2">
-            <button className="px-5 py-2 rounded-full border border-[#FDE0A1] bg-[#FFFDF5] text-[#F59E1A] text-xs font-bold transition-colors">
+          <div className="flex items-center gap-2 w-full lg:w-auto overflow-x-auto lg:overflow-visible lg:flex-wrap pb-2 lg:pb-0 scrollbar-hide">
+            <button className="px-5 py-2 rounded-full border border-[#FDE0A1] bg-[#FFFDF5] text-[#F59E1A] text-xs font-bold transition-colors whitespace-nowrap shrink-0">
               All
             </button>
-            <button className="px-5 py-2 rounded-full border border-gray-300 text-gray-500 hover:bg-gray-50 bg-white text-xs font-bold transition-colors">
+            <button className="px-5 py-2 rounded-full border border-gray-300 text-gray-500 hover:bg-gray-50 bg-white text-xs font-bold transition-colors whitespace-nowrap shrink-0">
               Claims
             </button>
-            <button className="px-5 py-2 rounded-full border border-gray-300 text-gray-500 hover:bg-gray-50 bg-white text-xs font-bold transition-colors">
+            <button className="px-5 py-2 rounded-full border border-gray-300 text-gray-500 hover:bg-gray-50 bg-white text-xs font-bold transition-colors whitespace-nowrap shrink-0">
               Top-Ups
             </button>
-            <button className="px-5 py-2 rounded-full border border-gray-300 text-gray-500 hover:bg-gray-50 bg-white text-xs font-bold transition-colors">
+            <button className="px-5 py-2 rounded-full border border-gray-300 text-gray-500 hover:bg-gray-50 bg-white text-xs font-bold transition-colors whitespace-nowrap shrink-0">
               Auto-Approved
             </button>
           </div>
 
           {/* Search & Date Filter */}
-          <div className="flex items-center gap-3 w-full lg:w-auto">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
             <select className="border border-gray-300 rounded-lg px-4 py-2.5 text-xs font-bold text-[#252A3A] bg-white focus:outline-none min-w-[140px] appearance-none cursor-pointer">
               <option>90 Days</option>
               <option>30 Days</option>

@@ -1,11 +1,22 @@
 "use client";
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Check, Delete } from 'lucide-react';
 
 export default function FamilySecureAccountPage() {
+  const router = useRouter();
   const [agreed, setAgreed] = useState(true);
+  const [pin, setPin] = useState<string[]>([]);
+
+  const handleDigit = (digit: string) => {
+    if (pin.length < 6) setPin([...pin, digit]);
+  };
+
+  const handleDelete = () => {
+    setPin(pin.slice(0, -1));
+  };
 
   // Keypad button configuration
   const keypadButtons = [
@@ -63,7 +74,7 @@ export default function FamilySecureAccountPage() {
 
         {/* Headers */}
         <div className="w-full text-center mb-10">
-          <h1 className="text-[28px] font-bold mb-2">
+          <h1 className="text-2xl sm:text-[28px] font-bold mb-2">
             Secure your account
           </h1>
           <p className="text-[15px] text-gray-600 font-medium">
@@ -82,17 +93,32 @@ export default function FamilySecureAccountPage() {
             </p>
           </div>
 
+          {/* PIN Dots */}
+          <div className="flex gap-3 mb-6">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div
+                key={i}
+                className={`w-4 h-4 rounded-full border-2 transition-colors ${
+                  i < pin.length
+                    ? 'bg-[#F59E1A] border-[#F59E1A]'
+                    : 'border-gray-300 bg-white'
+                }`}
+              />
+            ))}
+          </div>
+
           {/* Keypad Grid */}
           <div className="grid grid-cols-3 gap-3 w-[260px]">
             {keypadButtons.map((btn, index) => {
               if (btn === '') {
-                return <div key={index} className="h-[52px]"></div>; // Empty space for layout
+                return <div key={index} className="h-[52px]"></div>;
               }
 
               if (btn === 'delete') {
                 return (
                   <button 
                     key={index}
+                    onClick={handleDelete}
                     className="h-[52px] rounded-lg border border-gray-300 flex items-center justify-center text-gray-600 hover:bg-gray-50 active:bg-gray-100 transition-colors"
                   >
                     <Delete className="w-5 h-5" />
@@ -103,6 +129,7 @@ export default function FamilySecureAccountPage() {
               return (
                 <button 
                   key={index}
+                  onClick={() => handleDigit(btn)}
                   className="h-[52px] rounded-lg border border-gray-300 flex items-center justify-center text-xl font-medium text-[#252A3A] hover:bg-gray-50 active:bg-gray-100 transition-colors"
                 >
                   {btn}
@@ -131,7 +158,10 @@ export default function FamilySecureAccountPage() {
         </div>
 
         {/* Action Button */}
-        <button className="w-full bg-[#F59E1A] hover:bg-[#E08D16] text-white py-4 rounded-xl font-bold text-[15px] transition-colors shadow-sm">
+        <button
+          onClick={() => router.push('/family')}
+          className="w-full bg-[#F59E1A] hover:bg-[#E08D16] text-white py-4 rounded-xl font-bold text-[15px] transition-colors shadow-sm"
+        >
           Finish
         </button>
 

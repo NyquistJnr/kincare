@@ -1,43 +1,12 @@
 import React from 'react';
-import Image from 'next/image';
-import { Bell, ArrowRight, Lightbulb } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowRight, Lightbulb } from 'lucide-react';
 
 export default function DashboardPage() {
   return (
     <div className="flex-1 min-h-screen bg-[#F8F9FA] text-[#252A3A] font-sans">
-      {/* Top Header */}
-      <header className="flex items-center justify-between px-8 py-6 bg-white border-b border-gray-100">
-        <h1 className="text-xl font-semibold">Dashboard</h1>
-        
-        <div className="flex items-center gap-6">
-          {/* Notification Icon */}
-          <div className="relative p-2 bg-[#FFF4E5] rounded-lg cursor-pointer">
-            <Bell className="w-5 h-5 text-[#F59E1A]" />
-            <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#E5484D] rounded-full"></span>
-          </div>
-
-          {/* User Profile */}
-          <div className="flex items-center gap-3 cursor-pointer">
-            <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden relative">
-              {/* Using a placeholder avatar, replace src with actual image */}
-              <Image 
-                src="/images/profile.jpg" 
-                alt="Ngozi" 
-                layout="fill" 
-                objectFit="cover"
-                unoptimized
-              />
-            </div>
-            <div>
-              <p className="text-sm font-semibold">Ngozi</p>
-              <p className="text-xs text-gray-500">Family · Lagos</p>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content */}
-      <main className="p-8 max-w-8xl mx-auto space-y-6">
+      <main className="p-4 sm:p-8 max-w-8xl mx-auto space-y-6">
         {/* Greeting */}
         <h2 className="text-2xl font-semibold">Good evening, Ngozi 👋</h2>
 
@@ -46,15 +15,15 @@ export default function DashboardPage() {
           <div className="space-y-4">
             <div>
               <p className="text-xs font-medium text-gray-500 tracking-wider mb-1">HEALTH WEALTH BALANCE</p>
-              <h3 className="text-4xl font-semibold text-black">₦485,000</h3>
+              <h3 className="text-3xl sm:text-4xl font-semibold text-black">₦485,000</h3>
               <p className="text-xs text-gray-500 mt-1">
                 Funded by Kemi 💛 · Always ready for you
               </p>
             </div>
-            <button className="flex items-center gap-2 bg-[#F59E1A] hover:bg-[#E08D16] text-white px-5 py-2.5 rounded-lg font-medium transition-colors text-sm">
+            <Link href="/family/raise-claim" className="flex items-center gap-2 bg-[#F59E1A] hover:bg-[#E08D16] text-white px-5 py-2.5 rounded-lg font-medium transition-colors text-sm">
               <ArrowRight className="w-4 h-4" />
               <span>Raise Claim</span>
-            </button>
+            </Link>
           </div>
 
           <div className="mt-6 md:mt-0 flex flex-col items-end text-right">
@@ -83,9 +52,9 @@ export default function DashboardPage() {
         <div className="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden">
           <div className="flex items-center justify-between p-6">
             <h3 className="text-lg font-medium">My Recent Claims</h3>
-            <button className="flex items-center gap-1 text-[#F59E1A] hover:text-[#E08D16] text-sm font-medium transition-colors">
+            <Link href="/family/my-claim" className="flex items-center gap-1 text-[#F59E1A] hover:text-[#E08D16] text-sm font-medium transition-colors">
               See all <ArrowRight className="w-4 h-4" />
-            </button>
+            </Link>
           </div>
           
           <div className="overflow-x-auto">

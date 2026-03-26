@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Check } from 'lucide-react';
 
 export default function ConnectWalletPage() {
   // Simple state to simulate input values for the demonstration
+  const router = useRouter();
   const [fullName, setFullName] = useState('Ngozi Okeke');
   const [pairingCode, setPairingCode] = useState('KC·7F2A');
 
@@ -56,11 +58,11 @@ export default function ConnectWalletPage() {
 
         {/* Headers */}
         <div className="w-full text-left mb-5">
-          <h1 className="text-3xl font-semibold text-[#0D0F14] mb-2">
+          <h1 className="text-2xl sm:text-3xl font-semibold text-[#0D0F14] mb-2">
             Connect to your family&apos;s wallet
           </h1>
-          <p className="text-[18px] text-[#343B52] leading-relaxed">
-            Enter your full name and the pairing code shared<br/>
+          <p className="text-base sm:text-[18px] text-[#343B52] leading-relaxed">
+            Enter your full name and the pairing code shared
             with you. Your wallet access will be set up instantly.
           </p>
         </div>
@@ -105,7 +107,10 @@ export default function ConnectWalletPage() {
         </div>
 
         {/* Continue Button */}
-        <button className="w-full bg-[#F59E1A] hover:bg-[#E08D16] text-white py-4 rounded-xl font-bold text-[15px] transition-colors mb-4">
+        <button
+          onClick={() => router.push('/set-pin-family')}
+          className="w-full bg-[#F59E1A] hover:bg-[#E08D16] text-white py-4 rounded-xl font-bold text-[15px] transition-colors mb-4"
+        >
           Continue
         </button>
 

@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Plane, Home, Check } from 'lucide-react';
 
 export default function OnboardingRolePage() {
   // State to track which role is selected. Defaulting to 'family' to match your image.
+  const router = useRouter();
   const [selectedRole, setSelectedRole] = useState<'diaspora' | 'family'>('family');
 
   return (
@@ -32,7 +34,7 @@ export default function OnboardingRolePage() {
 
         {/* Header Text */}
         <div className="text-center mb-5 space-y-2">
-          <h1 className="text-[32px] font-bold leading-tight">
+          <h1 className="text-2xl sm:text-[32px] font-bold leading-tight">
             Who are you joining as?
           </h1>
           <p className="text-[15px] text-[#4E576E]">
@@ -103,7 +105,10 @@ export default function OnboardingRolePage() {
         </div>
 
         {/* Continue Button */}
-        <button className="w-full bg-[#F59E1A] hover:bg-[#E08D16] text-white py-4 rounded-xl font-bold text-[15px] transition-colors mb-4">
+        <button
+          onClick={() => router.push(selectedRole === 'diaspora' ? '/register' : '/connect')}
+          className="w-full bg-[#F59E1A] hover:bg-[#E08D16] text-white py-4 rounded-xl font-bold text-[15px] transition-colors mb-4"
+        >
           Continue
         </button>
 

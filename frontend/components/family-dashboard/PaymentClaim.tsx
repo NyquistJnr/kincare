@@ -1,42 +1,12 @@
 import React from 'react';
-import Image from 'next/image';
-import { Bell, ArrowLeft, Send } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowLeft, Send } from 'lucide-react';
 
 export default function ClaimConfirmationPage() {
   return (
     <div className="flex-1 min-h-screen bg-[#F8F9FA] text-[#252A3A] font-sans">
-      {/* Top Header */}
-      <header className="flex items-center justify-between px-8 py-6 bg-white border-b border-gray-100">
-        <h1 className="text-xl font-bold">Raise Claim</h1>
-        
-        <div className="flex items-center gap-6">
-          {/* Notification Icon */}
-          <div className="relative p-2 bg-[#FFF4E5] rounded-lg cursor-pointer">
-            <Bell className="w-5 h-5 text-[#F59E1A]" />
-            <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#F59E1A] rounded-full border-2 border-white"></span>
-          </div>
-
-          {/* User Profile */}
-          <div className="flex items-center gap-3 cursor-pointer">
-            <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden relative">
-              <Image 
-                src="/images/profile.jpg" 
-                alt="Ngozi" 
-                layout="fill" 
-                objectFit="cover"
-                unoptimized
-              />
-            </div>
-            <div>
-              <p className="text-sm font-bold">Ngozi</p>
-              <p className="text-xs text-gray-500">Family · Lagos</p>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content - Centered */}
-      <main className="p-8 pb-20 flex flex-col items-center text-center mt-12">
+      <main className="p-4 sm:p-8 pb-20 flex flex-col items-center text-center mt-6 sm:mt-12">
         
         {/* Send/Paper Plane Icon */}
         <div className="mb-6 rotate-[-15deg]">
@@ -44,7 +14,7 @@ export default function ClaimConfirmationPage() {
         </div>
 
         {/* Titles & Description */}
-        <h2 className="text-[32px] font-bold text-[#252A3A] mb-3 tracking-tight">
+        <h2 className="text-2xl sm:text-[32px] font-bold text-[#252A3A] mb-3 tracking-tight">
           Claim sent to Ifunanya
         </h2>
         <p className="text-[15px] text-[#252A3A] leading-relaxed font-medium max-w-[480px]">
@@ -95,10 +65,10 @@ export default function ClaimConfirmationPage() {
         </div>
 
         {/* Back Button */}
-        <button className="w-full max-w-[440px] bg-white border border-gray-300 text-[#252A3A] hover:bg-gray-50 rounded-xl py-3.5 font-bold text-[13px] transition-colors flex items-center justify-center gap-2 shadow-sm mb-3">
+        <Link href="/family" className="w-full max-w-[440px] bg-white border border-gray-300 text-[#252A3A] hover:bg-gray-50 rounded-xl py-3.5 font-bold text-[13px] transition-colors flex items-center justify-center gap-2 shadow-sm mb-3">
           <ArrowLeft className="w-4 h-4 text-gray-500" />
           Back to Dashboard
-        </button>
+        </Link>
 
         {/* Footer Note */}
         <p className="text-[9px] text-gray-400 font-medium max-w-[440px] text-center">

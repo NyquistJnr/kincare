@@ -1,42 +1,12 @@
 import React from 'react';
-import Image from 'next/image';
-import { Bell, Check, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
+import { Check, ArrowLeft } from 'lucide-react';
 
 export default function PaymentSuccessPage() {
   return (
     <div className="flex-1 min-h-screen bg-[#F8F9FA] text-[#252A3A] font-sans">
-      {/* Top Header */}
-      <header className="flex items-center justify-between px-8 py-6 bg-white border-b border-gray-100">
-        <h1 className="text-xl font-bold">Raise Claim</h1>
-        
-        <div className="flex items-center gap-6">
-          {/* Notification Icon */}
-          <div className="relative p-2 bg-[#FFF4E5] rounded-lg cursor-pointer">
-            <Bell className="w-5 h-5 text-[#F59E1A]" />
-            <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#F59E1A] rounded-full border-2 border-white"></span>
-          </div>
-
-          {/* User Profile */}
-          <div className="flex items-center gap-3 cursor-pointer">
-            <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden relative">
-              <Image 
-                src="/images/profile.jpg" 
-                alt="Ifunanya Obi" 
-                layout="fill" 
-                objectFit="cover"
-                unoptimized
-              />
-            </div>
-            <div>
-              <p className="text-sm font-bold">Ifunanya Obi</p>
-              <p className="text-xs text-gray-500">Diaspora · Manchester</p>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content - Centered Success State */}
-      <main className="p-8 pb-20 flex flex-col items-center text-center mt-6">
+      <main className="p-4 sm:p-8 pb-20 flex flex-col items-center text-center mt-4 sm:mt-6">
         
         <div className="w-full max-w-[700px] flex flex-col items-center">
           
@@ -119,13 +89,13 @@ export default function PaymentSuccessPage() {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
-            <button className="w-full sm:w-auto bg-white border border-gray-300 text-[#252A3A] hover:bg-gray-50 rounded-xl px-8 py-3.5 font-medium text-sm transition-colors flex items-center justify-center gap-2 shadow-sm">
+            <Link href="/diaspora" className="w-full sm:w-auto bg-white border border-gray-300 text-[#252A3A] hover:bg-gray-50 rounded-xl px-8 py-3.5 font-medium text-sm transition-colors flex items-center justify-center gap-2 shadow-sm">
               <ArrowLeft className="w-4 h-4 text-gray-500" />
               Back to Dashboard
-            </button>
-            <button className="w-full sm:w-auto bg-[#22C55E] hover:bg-[#1CA850] text-white rounded-xl px-10 py-3.5 font-medium text-sm transition-colors shadow-sm">
+            </Link>
+            <Link href="/diaspora/topup-wallet" className="w-full sm:w-auto bg-[#22C55E] hover:bg-[#1CA850] text-white rounded-xl px-10 py-3.5 font-medium text-sm transition-colors shadow-sm text-center">
               Top-Up Wallet
-            </button>
+            </Link>
           </div>
 
         </div>

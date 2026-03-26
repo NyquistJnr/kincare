@@ -1,48 +1,18 @@
 import React from 'react';
-import Image from 'next/image';
-import { Bell, ArrowLeft, Check, Hospital } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowLeft, Check, Hospital } from 'lucide-react';
 
 export default function ReviewClaimPage() {
   return (
     <div className="flex-1 min-h-screen bg-[#F8F9FA] text-[#252A3A] font-sans">
-      {/* Top Header */}
-      <header className="flex items-center justify-between px-8 py-6 bg-white border-b border-gray-100">
-        <h1 className="text-xl font-medium">Raise Claim</h1>
-        
-        <div className="flex items-center gap-6">
-          {/* Notification Icon */}
-          <div className="relative p-2 bg-[#FFF4E5] rounded-lg cursor-pointer">
-            <Bell className="w-5 h-5 text-[#F59E1A]" />
-            <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#E5484D] rounded-full"></span>
-          </div>
-
-          {/* User Profile */}
-          <div className="flex items-center gap-3 cursor-pointer">
-            <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden relative">
-              <Image 
-                src="/images/profile.jpg" 
-                alt="Ifunanya Obi" 
-                layout="fill" 
-                objectFit="cover"
-                unoptimized
-              />
-            </div>
-            <div>
-              <p className="text-sm font-bold">Ifunanya Obi</p>
-              <p className="text-xs text-gray-500">Diaspora · Manchester</p>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content */}
-      <main className="p-8 max-w-7xl mx-auto">
+      <main className="p-4 sm:p-8 max-w-7xl mx-auto">
         
         {/* Breadcrumb Navigation */}
-        <button className="flex items-center gap-2 text-sm text-[#4E576E] font-medium mb-6 hover:text-gray-700 transition-colors">
+        <Link href="/diaspora/claims" className="flex items-center gap-2 text-sm text-[#4E576E] font-medium mb-6 hover:text-gray-700 transition-colors">
           <ArrowLeft className="w-4 h-4" />
           <span>All Claims / Review Claim</span>
-        </button>
+        </Link>
 
         {/* Content Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
@@ -171,9 +141,9 @@ export default function ReviewClaimPage() {
 
             {/* Action Buttons */}
             <div className="space-y-3">
-              <button className="w-full bg-[#22C55E] hover:bg-[#1CA850] text-white rounded-xl py-3.5 font-medium text-sm transition-colors">
+              <Link href="/diaspora/payment-successful" className="w-full bg-[#22C55E] hover:bg-[#1CA850] text-white rounded-xl py-3.5 font-medium text-sm transition-colors block text-center">
                 Approve - Pay ₦380,000
-              </button>
+              </Link>
               <button className="w-full bg-white border border-gray-300 text-[#252A3A] hover:bg-gray-50 rounded-xl py-3.5 font-medium text-sm transition-colors">
                 Decline Claim
               </button>

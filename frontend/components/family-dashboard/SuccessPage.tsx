@@ -1,42 +1,12 @@
 import React from 'react';
-import Image from 'next/image';
-import { Bell, Check, ArrowLeft, Info } from 'lucide-react';
+import Link from 'next/link';
+import { Check, ArrowLeft, Info } from 'lucide-react';
 
 export default function ClaimSuccessPage() {
   return (
     <div className="flex-1 min-h-screen bg-[#F8F9FA] text-[#252A3A] font-sans">
-      {/* Top Header */}
-      <header className="flex items-center justify-between px-8 py-6 bg-white border-b border-gray-100">
-        <h1 className="text-xl font-bold">Raise Claim</h1>
-        
-        <div className="flex items-center gap-6">
-          {/* Notification Icon */}
-          <div className="relative p-2 bg-[#FFF4E5] rounded-lg cursor-pointer">
-            <Bell className="w-5 h-5 text-[#F59E1A]" />
-            <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#E5484D] rounded-full"></span>
-          </div>
-
-          {/* User Profile */}
-          <div className="flex items-center gap-3 cursor-pointer">
-            <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden relative">
-              <Image 
-                src="/images/profile.jpg" 
-                alt="Ngozi" 
-                layout="fill" 
-                objectFit="cover"
-                unoptimized
-              />
-            </div>
-            <div>
-              <p className="text-sm font-bold">Ngozi</p>
-              <p className="text-xs text-gray-500">Family · Lagos</p>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content - Centered Success State */}
-      <main className="p-8 pb-20 overflow-y-auto flex flex-col items-center text-center">
+      <main className="p-4 sm:p-8 pb-20 overflow-y-auto flex flex-col items-center text-center">
         
         <div className="w-full max-w-[520px] flex flex-col items-center mt-6">
           
@@ -46,7 +16,7 @@ export default function ClaimSuccessPage() {
           </div>
 
           {/* Titles & Description */}
-          <h2 className="text-3xl font-bold text-[#252A3A] mb-3">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#252A3A] mb-3">
             Hospital Has Been Paid
           </h2>
           <p className="text-[15px] text-[#252A3A] mb-8 leading-relaxed">
@@ -72,7 +42,7 @@ export default function ClaimSuccessPage() {
           </div>
 
           {/* Details Grid (2x2) */}
-          <div className="w-full grid grid-cols-2 gap-4 text-left mb-6">
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4 text-left mb-6">
             
             {/* Box 1 */}
             <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
@@ -134,10 +104,10 @@ export default function ClaimSuccessPage() {
           </div>
 
           {/* Action Button */}
-          <button className="w-full bg-white border border-gray-300 text-[#252A3A] hover:bg-gray-50 rounded-xl py-3.5 font-bold text-sm transition-colors flex items-center justify-center gap-2 shadow-sm">
+          <Link href="/family" className="w-full bg-white border border-gray-300 text-[#252A3A] hover:bg-gray-50 rounded-xl py-3.5 font-bold text-sm transition-colors flex items-center justify-center gap-2 shadow-sm">
             <ArrowLeft className="w-4 h-4 text-gray-500" />
             Back to Dashboard
-          </button>
+          </Link>
 
         </div>
       </main>

@@ -1,44 +1,14 @@
 "use client";
 
 import React from 'react';
-import Image from 'next/image';
-import { Bell, ArrowLeft, Zap, Banknote, Clock, Lightbulb } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowLeft, Zap, Banknote, Clock, Lightbulb, Bell } from 'lucide-react';
 
 export default function AutoApprovalSuccess() {
   return (
     <div className="flex-1 min-h-screen bg-[#FAFAFA] text-[#252A3A] font-sans">
-      {/* Top Header */}
-      <header className="flex items-center justify-between px-8 py-6 bg-white border-b border-gray-100">
-        <h1 className="text-xl font-semibold">Dashboard</h1>
-        
-        <div className="flex items-center gap-6">
-          {/* Notification Icon */}
-          <div className="relative p-2 bg-[#FFF4E5] rounded-lg cursor-pointer">
-            <Bell className="w-5 h-5 text-[#F59E1A]" />
-            <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#F59E1A] rounded-full border-2 border-white"></span>
-          </div>
-
-          {/* User Profile */}
-          <div className="flex items-center gap-3 cursor-pointer">
-            <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden relative">
-              <Image 
-                src="/images/profile.jpg" 
-                alt="Ifunanya Obi" 
-                layout="fill" 
-                objectFit="cover"
-                unoptimized
-              />
-            </div>
-            <div>
-              <p className="text-sm font-semibold">Ifunanya Obi</p>
-              <p className="text-xs text-gray-500">Diaspora · Manchester</p>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content - Centered */}
-      <main className="p-8 pb-20 flex flex-col items-center text-center mt-10">
+      <main className="p-4 sm:p-8 pb-20 flex flex-col items-center text-center mt-6 sm:mt-10">
         
         <div className="w-full max-w-[600px] flex flex-col items-center">
           
@@ -48,7 +18,7 @@ export default function AutoApprovalSuccess() {
           </div>
 
           {/* Titles & Description */}
-          <h2 className="text-[32px] font-semibold text-[#252A3A] mb-3">
+          <h2 className="text-2xl sm:text-[32px] font-semibold text-[#252A3A] mb-3">
             Auto-Approval is Live
           </h2>
           <p className="text-[15px] text-[#252A3A] mb-6 leading-relaxed font-medium">
@@ -96,9 +66,9 @@ export default function AutoApprovalSuccess() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-4">
-              <button className="flex-1 border border-gray-300 text-[#252A3A] hover:bg-gray-50 rounded-lg py-3 font-semibold text-[13px] transition-colors">
+              <Link href="/diaspora/auto-approval" className="flex-1 border border-gray-300 text-[#252A3A] hover:bg-gray-50 rounded-lg py-3 font-semibold text-[13px] transition-colors text-center">
                 Update Rule
-              </button>
+              </Link>
               <button className="flex-1 border border-red-200 text-red-500 hover:bg-red-50 rounded-lg py-3 font-semibold text-[13px] transition-colors">
                 Deactivate
               </button>
@@ -110,10 +80,10 @@ export default function AutoApprovalSuccess() {
           </div>
 
           {/* Back to Dashboard Button */}
-          <button className="w-full bg-[#F59E1A] hover:bg-[#E08D16] text-white rounded-xl py-4 font-semibold text-[15px] transition-colors shadow-sm flex items-center justify-center gap-2">
+          <Link href="/diaspora" className="w-full bg-[#F59E1A] hover:bg-[#E08D16] text-white rounded-xl py-4 font-semibold text-[15px] transition-colors shadow-sm flex items-center justify-center gap-2">
             <ArrowLeft className="w-5 h-5" />
             Back to Dashboard
-          </button>
+          </Link>
 
         </div>
       </main>

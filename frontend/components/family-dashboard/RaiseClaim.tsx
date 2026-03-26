@@ -1,6 +1,5 @@
 import React from 'react';
-import Image from 'next/image';
-import { Bell, Check, FileText, AlertTriangle } from 'lucide-react';
+import { Check, FileText, AlertTriangle } from 'lucide-react';
 
 export default function RaiseClaimPage() {
   // TOGGLE THIS VARIABLE:
@@ -10,38 +9,8 @@ export default function RaiseClaimPage() {
 
   return (
     <div className="flex-1 min-h-screen bg-[#F8F9FA] text-[#252A3A] font-sans">
-      {/* Top Header */}
-      <header className="flex items-center justify-between px-8 py-6 bg-white border-b border-gray-100">
-        <h1 className="text-xl font-bold">Raise Claim</h1>
-        
-        <div className="flex items-center gap-6">
-          {/* Notification Icon */}
-          <div className="relative p-2 bg-[#FFF4E5] rounded-lg cursor-pointer">
-            <Bell className="w-5 h-5 text-[#F59E1A]" />
-            <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#E5484D] rounded-full"></span>
-          </div>
-
-          {/* User Profile */}
-          <div className="flex items-center gap-3 cursor-pointer">
-            <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden relative">
-              <Image 
-                src="/images/profile.jpg" 
-                alt="Ngozi" 
-                layout="fill" 
-                objectFit="cover"
-                unoptimized
-              />
-            </div>
-            <div>
-              <p className="text-sm font-bold">Ngozi</p>
-              <p className="text-xs text-gray-500">Family · Lagos</p>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content */}
-      <main className="p-8 max-w-8xl mx-auto space-y-6">
+      <main className="p-4 sm:p-8 max-w-8xl mx-auto space-y-6">
         
         {/* Main Form Card Container */}
         <div className="bg-white border border-gray-300 rounded-2xl p-8 shadow-sm">

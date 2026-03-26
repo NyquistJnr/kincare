@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Check, Apple } from 'lucide-react';
 
 export default function CreateAccountPage() {
   // State matching the populated fields in the screenshot
+  const router = useRouter();
   const [email, setEmail] = useState('ifunanyaokeke@gmail.com');
   const [password, setPassword] = useState('KC·7F2A');
 
@@ -15,7 +17,7 @@ export default function CreateAccountPage() {
       <div className="w-full max-w-md mx-auto flex flex-col items-center">
         
         {/* Logo (Using specific requested style) */}
-        <div className="flex items-center mb-10 px-2 space-x-2">
+        <div className="flex items-center mb-8 mt-10 px-2 space-x-2">
             <Image 
                 src="/images/logo.png" 
                 alt="KinCare Logo" 
@@ -31,30 +33,30 @@ export default function CreateAccountPage() {
         </div>
 
         {/* 5-Step Progress Stepper */}
-        <div className="flex items-center justify-between w-full mb-12 relative px-2">
+        <div className="flex items-center justify-between w-full mb-10 relative px-2">
           {/* Step 1 - Completed */}
           <div className="flex flex-col items-center relative z-10">
             <div className="w-8 h-8 rounded bg-[#00A859] text-white flex items-center justify-center">
               <Check className="w-4 h-4" strokeWidth={3} />
             </div>
-            <span className="absolute -bottom-5 text-[9px] text-[#00A859] font-bold tracking-wider">Role</span>
+            <span className="absolute -bottom-5 text-[9px] text-[#00A859] font-semibold tracking-wider">Role</span>
           </div>
           
           <div className="flex-1 h-0.5 bg-[#00A859] mx-2"></div>
           
           {/* Step 2 - Active */}
           <div className="flex flex-col items-center relative z-10">
-            <div className="w-8 h-8 rounded bg-[#F59E1A] text-white flex items-center justify-center font-bold">
+            <div className="w-8 h-8 rounded bg-[#F59E1A] text-white flex items-center justify-center font-semibold">
               2
             </div>
-            <span className="absolute -bottom-5 text-[9px] text-[#F59E1A] font-bold tracking-wider">Account</span>
+            <span className="absolute -bottom-5 text-[9px] text-[#F59E1A] font-semibold tracking-wider">Account</span>
           </div>
           
           <div className="flex-1 h-0.5 bg-gray-300 mx-2"></div>
           
           {/* Step 3 - Pending */}
           <div className="flex flex-col items-center relative z-10">
-            <div className="w-8 h-8 rounded bg-white border border-gray-300 text-gray-400 flex items-center justify-center font-bold">
+            <div className="w-8 h-8 rounded bg-white border border-gray-300 text-gray-400 flex items-center justify-center font-semibold">
               3
             </div>
           </div>
@@ -63,7 +65,7 @@ export default function CreateAccountPage() {
 
           {/* Step 4 - Pending */}
           <div className="flex flex-col items-center relative z-10">
-            <div className="w-8 h-8 rounded bg-white border border-gray-300 text-gray-400 flex items-center justify-center font-bold">
+            <div className="w-8 h-8 rounded bg-white border border-gray-300 text-gray-400 flex items-center justify-center font-semibold">
               4
             </div>
           </div>
@@ -72,7 +74,7 @@ export default function CreateAccountPage() {
 
           {/* Step 5 - Pending */}
           <div className="flex flex-col items-center relative z-10">
-            <div className="w-8 h-8 rounded bg-white border border-gray-300 text-gray-400 flex items-center justify-center font-bold">
+            <div className="w-8 h-8 rounded bg-white border border-gray-300 text-gray-400 flex items-center justify-center font-semibold">
               5
             </div>
           </div>
@@ -80,7 +82,7 @@ export default function CreateAccountPage() {
 
         {/* Headers */}
         <div className="w-full text-left mb-8">
-          <h1 className="text-2xl font-bold mb-1.5">
+          <h1 className="text-2xl font-semibold mb-1.5">
             Create your account
           </h1>
           <p className="text-[15px] text-gray-600">
@@ -146,7 +148,10 @@ export default function CreateAccountPage() {
         </div>
 
         {/* Action Button */}
-        <button className="w-full bg-[#F59E1A] hover:bg-[#E08D16] text-white py-4 rounded-xl font-bold text-[15px] transition-colors mb-6 shadow-sm">
+        <button
+          onClick={() => router.push('/set-pin')}
+          className="w-full bg-[#F59E1A] hover:bg-[#E08D16] text-white py-4 rounded-xl font-bold text-[15px] transition-colors mb-6 shadow-sm"
+        >
           Create Account
         </button>
 

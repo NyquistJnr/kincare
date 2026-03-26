@@ -1,7 +1,6 @@
 import React from 'react';
-import Image from 'next/image';
+import Link from 'next/link';
 import { 
-  Bell, 
   Plus, 
   ArrowRight, 
   Zap, 
@@ -12,38 +11,8 @@ import {
 export default function DiasporaDashboardPage() {
   return (
     <div className="flex-1 min-h-screen bg-[#F8F9FA] text-[#252A3A] font-sans">
-      {/* Top Header */}
-      <header className="flex items-center justify-between px-8 py-6 bg-white border-b border-gray-100">
-        <h1 className="text-xl font-medium">Dashboard</h1>
-        
-        <div className="flex items-center gap-6">
-          {/* Notification Icon */}
-          <div className="relative p-2 bg-[#FFF4E5] rounded-lg cursor-pointer">
-            <Bell className="w-5 h-5 text-[#F59E1A]" />
-            <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#E5484D] rounded-full"></span>
-          </div>
-
-          {/* User Profile */}
-          <div className="flex items-center gap-3 cursor-pointer">
-            <div className="w-10 h-10 rounded-full bg-gray-200 overflow-hidden relative">
-              <Image 
-                src="/images/profile.jpg" 
-                alt="Ifunanya Obi" 
-                layout="fill" 
-                objectFit="cover"
-                unoptimized
-              />
-            </div>
-            <div>
-              <p className="text-sm font-bold">Ifunanya Obi</p>
-              <p className="text-xs text-[#4E576E]">Diaspora · Manchester</p>
-            </div>
-          </div>
-        </div>
-      </header>
-
       {/* Main Content */}
-      <main className="p-8 max-w-7xl mx-auto space-y-6">
+      <main className="p-4 sm:p-8 max-w-7xl mx-auto space-y-6">
         
         {/* Greeting & Top Action */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-2">
@@ -51,10 +20,10 @@ export default function DiasporaDashboardPage() {
             <h2 className="text-2xl text-black font-bold mb-1">Good evening, Ifunaya 👋</h2>
             <p className="text-[#4E576E] text-md">Here&apos;s the status of your family&apos;s health wallet.</p>
           </div>
-          <button className="flex items-center gap-2 bg-[#F59E1A] hover:bg-[#E08D16] text-white px-6 py-3 rounded-xl font-bold transition-colors">
+          <Link href="/diaspora/topup-wallet" className="flex items-center gap-2 bg-[#F59E1A] hover:bg-[#E08D16] text-white px-6 py-3 rounded-xl font-bold transition-colors">
             <Plus className="w-5 h-5" />
             <span>Top Wallet</span>
-          </button>
+          </Link>
         </div>
 
         {/* Cards Grid */}
@@ -64,7 +33,7 @@ export default function DiasporaDashboardPage() {
           <div className="lg:col-span-2 bg-white border border-gray-300 rounded-2xl p-6 md:p-8 flex flex-col justify-between shadow-sm">
             <div>
               <p className="text-xs font-medium text-[#4E576E] tracking-wider mb-2 uppercase">HEALTH WEALTH BALANCE</p>
-              <h3 className="text-5xl font-semibold text-black mb-2">₦485,000</h3>
+              <h3 className="text-3xl sm:text-5xl font-semibold text-black mb-2">₦485,000</h3>
               <p className="text-sm text-[#4E576E]">
                 Covering 3 family members · Anambra, Nigeria
               </p>
@@ -88,9 +57,9 @@ export default function DiasporaDashboardPage() {
                   <ArrowRight className="w-4 h-4" />
                   <span>Raise Claim</span>
                 </button>
-                <button className="flex items-center gap-2 bg-white border border-gray-300 hover:bg-gray-50 text-[#252A3A] px-5 py-2.5 rounded-lg font-medium transition-colors text-sm">
+                <Link href="/diaspora/claims" className="flex items-center gap-2 bg-white border border-gray-300 hover:bg-gray-50 text-[#252A3A] px-5 py-2.5 rounded-lg font-medium transition-colors text-sm">
                   View History
-                </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -99,7 +68,7 @@ export default function DiasporaDashboardPage() {
           <div className="flex flex-col gap-4">
             
             {/* Auto-Approval Card */}
-            <div className="bg-white border border-gray-200 border-l-4 border-l-[#F59E1A] rounded-xl p-5 shadow-sm hover:shadow-md transition cursor-pointer flex gap-4 group">
+            <Link href="/diaspora/auto-approval" className="bg-white border border-gray-200 border-l-4 border-l-[#F59E1A] rounded-xl p-5 shadow-sm hover:shadow-md transition cursor-pointer flex gap-4 group">
               <div className="shrink-0 mt-0.5">
                 <Zap className="w-5 h-5 text-[#F59E1A]" fill="#FFF9EA" />
               </div>
@@ -112,10 +81,10 @@ export default function DiasporaDashboardPage() {
                   Ensure emergencies are covered even when you&apos;re unreachable. Takes 2 minutes.
                 </p>
               </div>
-            </div>
+            </Link>
 
             {/* Link Kin Card */}
-            <div className="bg-white border border-gray-200 border-l-4 border-l-[#00A859] rounded-xl p-5 shadow-sm hover:shadow-md transition cursor-pointer flex gap-4 group">
+            <Link href="/diaspora/link-kin" className="bg-white border border-gray-200 border-l-4 border-l-[#00A859] rounded-xl p-5 shadow-sm hover:shadow-md transition cursor-pointer flex gap-4 group">
               <div className="shrink-0 mt-0.5">
                 <LinkIcon className="w-5 h-5 text-[#00A859]" />
               </div>
@@ -128,7 +97,7 @@ export default function DiasporaDashboardPage() {
                   2 members linked. Share a new pairing code to add more family members.
                 </p>
               </div>
-            </div>
+            </Link>
 
           </div>
         </div>
@@ -137,9 +106,9 @@ export default function DiasporaDashboardPage() {
         <div className="bg-white border border-gray-300 rounded-xl shadow-sm overflow-hidden">
           <div className="flex items-center justify-between p-6">
             <h3 className="text-lg font-medium">Recent Claims</h3>
-            <button className="flex items-center gap-1 text-[#F59E1A] hover:text-[#E08D16] text-sm font-medium transition-colors">
+            <Link href="/diaspora/claims" className="flex items-center gap-1 text-[#F59E1A] hover:text-[#E08D16] text-sm font-medium transition-colors">
               See all <ArrowRight className="w-4 h-4" />
-            </button>
+            </Link>
           </div>
           
           <div className="overflow-x-auto">
@@ -178,9 +147,9 @@ export default function DiasporaDashboardPage() {
                   </td>
                   <td className="px-6 py-4 text-xs font-medium text-[#252A3A]">2 min ago</td>
                   <td className="px-6 py-4 text-right">
-                    <button className="bg-[#F59E1A] hover:bg-[#E08D16] text-white px-5 py-1.5 rounded-lg text-xs font-medium transition-colors">
+                    <Link href="/diaspora/review-claim" className="bg-[#F59E1A] hover:bg-[#E08D16] text-white px-5 py-1.5 rounded-lg text-xs font-medium transition-colors inline-block">
                       Review
-                    </button>
+                    </Link>
                   </td>
                 </tr>
 

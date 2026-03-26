@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { Check, Info } from 'lucide-react';
 
 export default function VerifyIdentity() {
   // State matching the populated fields in the screenshot
+  const router = useRouter();
   const [bvn, setBvn] = useState('22••••••••3');
   const [fullName, setFullName] = useState('Ifunaya Chidinma Okeke');
   const [phone, setPhone] = useState('+44 7700 900821');
@@ -83,7 +85,7 @@ export default function VerifyIdentity() {
 
         {/* Headers */}
         <div className="w-full text-left mb-8">
-          <h1 className="text-[28px] font-bold mb-2">
+          <h1 className="text-2xl sm:text-[28px] font-bold mb-2">
             Verify your identity
           </h1>
           <p className="text-[15px] text-gray-600 font-medium leading-relaxed pr-4">
@@ -150,7 +152,10 @@ export default function VerifyIdentity() {
         </div>
 
         {/* Action Button */}
-        <button className="w-full bg-[#F59E1A] hover:bg-[#E08D16] text-white py-4 rounded-xl font-bold text-[15px] transition-colors shadow-sm">
+        <button
+          onClick={() => router.push('/link-payment')}
+          className="w-full bg-[#F59E1A] hover:bg-[#E08D16] text-white py-4 rounded-xl font-bold text-[15px] transition-colors shadow-sm"
+        >
           Continue
         </button>
 
