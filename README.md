@@ -140,7 +140,16 @@ funding through to hospital payment confirmation.
 
 ### Chidinma Njoku — Frontend Developer
 
-- *(Chidinma to complete with specific features built)*
+- Built the complete diaspora member dashboard — wallet overview, claims list, claim review, top-up wallet, linked kin management, bank & cards, and auto-approval configuration
+- Built the family member dashboard — raise claim flow, my claims list, payment confirmation, and success screens
+- Built the admin dashboard — system overview with stats, recent claims table, and settings
+- Implemented the full onboarding flow — role selection, diaspora registration, email verification, PIN setup, payment method linking, and family member wallet pairing
+- Created a responsive sidebar navigation system with mobile hamburger menu, slide-in drawer overlay, and close-on-outside-click behaviour across all three dashboard contexts
+- Built a reusable settings page component shared across diaspora, family, and admin dashboards
+- Implemented AI claim brief and cost anomaly detection UI on the claim review screen
+- Built the auto-approval rules configuration interface with toggle controls and threshold settings
+- Made all pages fully mobile responsive with adaptive layouts, padding, typography, and grid breakpoints
+- Integrated PIN entry keypad with live dot indicators for the security setup screens
 
 ### Pedro Obi — Frontend Developer
 
