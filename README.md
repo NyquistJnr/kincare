@@ -79,8 +79,6 @@ layer that flags suspicious invoices before any payment is approved.
 
 ## Tech Stack
 
-*(To be completed by development team)*
-
 - **Frontend:** NextJs, Tailwind CSS, Typescript
 - **Backend:** Django, Python
 - **Database:** Postgres DB
