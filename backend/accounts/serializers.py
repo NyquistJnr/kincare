@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Tenant, PairingCode
+from .models import User, Tenant, PairingCode, PaymentMethod
 from rest_framework_simplejwt.tokens import RefreshToken
 
 class DiasporaSignupSerializer(serializers.ModelSerializer):
@@ -81,3 +81,38 @@ class UniversalLoginSerializer(serializers.Serializer):
             }
             
         raise serializers.ValidationError({"detail": "Invalid credentials provided."})
+
+class LinkCardSerializer(serializers.Serializer):
+    """Step 1: Submit card details."""
+    pan = serializers.CharField(max_length=19, write_only=True)
+    pin = serializers.CharField(max_length=4, min_length=4, write_only=True)
+    expiry_date = serializers.CharField(
+        max_length=4, write_only=True,
+        help_text="Card expiry in MMYY format e.g. 1226"
+    )
+    cvv = serializers.CharField(max_length=4, write_only=True)
+
+class VerifyCardOtpSerializer(serializers.Serializer):
+    """Step 2: Confirm OTP to activate the linked card."""
+    otp = serializers.CharField(max_length=8)
+    transaction_ref = serializers.CharField(max_length=100)
+
+class PaymentMethodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PaymentMethod
+        fields = ['id', 'pan_last4', 'card_type', 'expiry', 'is_active', 'created_at']
+        read_only_fields = fields
+
+class InitiateCardLinkSerializer(serializers.Serializer):
+    """
+    No card details needed from the user — Interswitch's checkout widget
+    collects everything. We just need to know who is initiating.
+    This serializer is mainly for documentation/schema purposes.
+    """
+    pass
+
+class PaymentMethodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PaymentMethod
+        fields = ['id', 'pan_last4', 'card_type', 'is_active', 'created_at']
+        read_only_fields = fields

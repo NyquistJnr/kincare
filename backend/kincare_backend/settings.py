@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-l#j(0j^e&x%)$iy!qw36a1g+u6kzpw(1x%_(x6q8j!*7=tq_g4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -45,11 +45,13 @@ INSTALLED_APPS = [
     # Third-party apps
     'rest_framework',
     'drf_spectacular',
+    'corsheaders',
     # Local apps
     'accounts',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -164,6 +166,14 @@ SPECTACULAR_SETTINGS = {
 # QStash Token (Store this in a .env file later)
 QSTASH_TOKEN = os.getenv('QSTASH_TOKEN', 'your-upstash-token-here')
 
+# INTERSWITCH
 INTERSWITCH_CLIENT_ID = os.getenv('INTERSWITCH_CLIENT_ID')
 INTERSWITCH_SECRET_KEY = os.getenv('INTERSWITCH_SECRET_KEY')
 INTERSWITCH_ENV = os.getenv('INTERSWITCH_ENV', 'SANDBOX')
+INTERSWITCH_MERCHANT_CODE = os.getenv('INTERSWITCH_MERCHANT_CODE')
+INTERSWITCH_PAYMENT_ITEM_ID = os.getenv('INTERSWITCH_PAYMENT_ITEM_ID')
+INTERSWITCH_PUBLIC_KEY_MODULUS = os.getenv('INTERSWITCH_PUBLIC_KEY_MODULUS')
+INTERSWITCH_PUBLIC_KEY_EXPONENT = os.getenv('INTERSWITCH_PUBLIC_KEY_EXPONENT', '10001')
+INTERSWITCH_REDIRECT_URL = os.getenv('INTERSWITCH_REDIRECT_URL', 'http://localhost:3000/payment/callback')
+INTERSWITCH_WEBHOOK_SECRET = os.getenv('INTERSWITCH_WEBHOOK_SECRET')
+CORS_ALLOW_ALL_ORIGINS = True

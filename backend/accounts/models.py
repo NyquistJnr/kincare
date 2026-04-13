@@ -51,3 +51,19 @@ class PairingCode(models.Model):
 
     def __str__(self):
         return f"{self.code} - {'Valid' if self.is_valid() else 'Expired/Used'}"
+
+class PaymentMethod(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='payment_methods')
+
+    token = models.CharField(max_length=255, blank=True)
+    pan_last4 = models.CharField(max_length=4, blank=True)
+    card_type = models.CharField(max_length=50, blank=True)
+
+    transaction_ref = models.CharField(max_length=100, unique=True)
+
+    is_active = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - **** {self.pan_last4 or 'pending'}"

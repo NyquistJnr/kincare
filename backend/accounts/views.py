@@ -1,3 +1,4 @@
+import uuid as uuid_lib
 from django.conf import settings
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -6,14 +7,14 @@ from django.contrib.auth.hashers import make_password
 from drf_spectacular.utils import extend_schema
 from qstash import QStash
 
-from .models import PairingCode, User
+from .models import PairingCode, User, PaymentMethod
 from .serializers import (
     DiasporaSignupSerializer, 
     PinSetupSerializer, 
     KycSerializer,
     GeneratePairingCodeSerializer,
     FamilyOnboardSerializer,
-    UniversalLoginSerializer
+    UniversalLoginSerializer, LinkCardSerializer, VerifyCardOtpSerializer, PaymentMethodSerializer
 )
 from .interswitch_service import InterswitchService
 from rest_framework.permissions import IsAuthenticated
@@ -173,3 +174,171 @@ class CustomTokenRefreshView(TokenRefreshView):
     )
     def post(self, request, *args, **kwargs):
         return super().post(request, *args, **kwargs)
+
+class LinkCardView(APIView):
+    """
+    POST /payment-methods/link/
+    Step 1: Diaspora member submits card details.
+    Interswitch validates the card and sends an OTP to the cardholder's
+    bank-registered phone number.
+    """
+    permission_classes = [IsAuthenticated]
+    serializer_class = LinkCardSerializer
+
+    @extend_schema(summary="Link Payment Card (Step 1 — Initiate)", tags=["Payment Methods"])
+    def post(self, request):
+        user = request.user
+
+        if user.role != 'DIASPORA_MEMBER':
+            return Response(
+                {"success": False, "message": "Only Diaspora Members can link payment methods."},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        serializer = LinkCardSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(
+                {"success": False, "message": "Validation failed", "data": serializer.errors},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        data = serializer.validated_data
+        interswitch = InterswitchService()
+
+        # Build encrypted authData from raw card fields
+        try:
+            auth_data = interswitch.build_auth_data(
+                pan=data['pan'],
+                pin=data['pin'],
+                expiry_date=data['expiry_date'],
+                cvv=data['cvv'],
+            )
+        except Exception as e:
+            return Response(
+                {"success": False, "message": f"Failed to encrypt card data: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+        transaction_ref = f"KIN-{uuid_lib.uuid4().hex[:12].upper()}"
+
+        result = interswitch.initiate_card_validation(
+            auth_data=auth_data,
+            transaction_ref=transaction_ref,
+        )
+
+        if not result["success"]:
+            return Response(
+                {"success": False, "message": result.get("error", "Card validation failed.")},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Store a pending payment method record — activated after OTP
+        PaymentMethod.objects.filter(user=user, is_active=False).delete()  # clean stale pending
+        PaymentMethod.objects.create(
+            user=user,
+            token="pending",
+            pan_last4=data['pan'][-4:],
+            expiry=f"{data['expiry_date'][:2]}/{data['expiry_date'][2:]}",
+            transaction_ref=transaction_ref,
+            is_active=False,
+        )
+
+        return Response({
+            "success": True,
+            "message": result["message"],
+            "data": {
+                "transaction_ref": transaction_ref,
+                "payment_id": result.get("payment_id"),
+            }
+        }, status=status.HTTP_200_OK)
+
+
+class VerifyCardOtpView(APIView):
+    """
+    POST /payment-methods/link/verify-otp/
+    Step 2: Submit OTP to confirm card ownership.
+    On success the card is tokenised and saved.
+    """
+    permission_classes = [IsAuthenticated]
+    serializer_class = VerifyCardOtpSerializer
+
+    @extend_schema(summary="Link Payment Card (Step 2 — Verify OTP)", tags=["Payment Methods"])
+    def post(self, request):
+        user = request.user
+        serializer = VerifyCardOtpSerializer(data=request.data)
+
+        if not serializer.is_valid():
+            return Response(
+                {"success": False, "message": "Validation failed", "data": serializer.errors},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        otp = serializer.validated_data['otp']
+        transaction_ref = serializer.validated_data['transaction_ref']
+
+        try:
+            pending = PaymentMethod.objects.get(
+                user=user,
+                transaction_ref=transaction_ref,
+                is_active=False,
+            )
+        except PaymentMethod.DoesNotExist:
+            return Response(
+                {"success": False, "message": "No pending card validation found for this reference."},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        interswitch = InterswitchService()
+
+        # We need the original authData to pass to the OTP endpoint.
+        # Rebuild it from nothing — Interswitch actually only needs paymentId + otp
+        # for the auth call, but their signature requires authData too.
+        # We pass a minimal placeholder since the card data isn't retained server-side.
+        result = interswitch.authorize_card_validation_otp(
+            otp=otp,
+            payment_id=request.data.get("payment_id", ""),
+            transaction_ref=transaction_ref,
+            auth_data="",
+        )
+
+        if not result["success"]:
+            return Response(
+                {"success": False, "message": result.get("error", "OTP verification failed.")},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        pending.token = result["token"]
+        pending.pan_last4 = result.get("pan_last4") or pending.pan_last4
+        pending.card_type = result.get("card_type", "")
+        pending.is_active = True
+        pending.save()
+
+        return Response({
+            "success": True,
+            "message": "Card linked successfully.",
+            "data": PaymentMethodSerializer(pending).data
+        }, status=status.HTTP_200_OK)
+
+
+class PaymentMethodListView(APIView):
+    """
+    GET /payment-methods/
+    List all active linked payment methods for the authenticated Diaspora member.
+    """
+    permission_classes = [IsAuthenticated]
+
+    @extend_schema(summary="List Linked Payment Methods", tags=["Payment Methods"])
+    def get(self, request):
+        user = request.user
+
+        if user.role != 'DIASPORA_MEMBER':
+            return Response(
+                {"success": False, "message": "Only Diaspora Members have payment methods."},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        methods = PaymentMethod.objects.filter(user=user, is_active=True)
+        return Response({
+            "success": True,
+            "data": PaymentMethodSerializer(methods, many=True).data
+        }, status=status.HTTP_200_OK)
