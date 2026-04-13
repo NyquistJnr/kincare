@@ -1,6 +1,5 @@
-import DiasporaDashboard from "@/components/diaspora/Dashboard";
+import DiasporaDashboardPage from "@/components/diaspora-dashboard/Dashboard";
 
-const Diaspora = () => {
-  return <DiasporaDashboard />;
-};
-export default Diaspora;
+export default function DiasporaDashboard() {
+  return <DiasporaDashboardPage />;
+}

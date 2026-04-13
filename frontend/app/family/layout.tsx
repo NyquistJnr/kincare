@@ -3,26 +3,21 @@
 import { useState } from "react";
 import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
-import Sidebar from "@/components/diaspora-dashboard/generics/SideBar";
+import Sidebar from "@/components/family-dashboard/generics/SideBar";
 import { Header } from "@/components/global";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const titleMap: Record<string, string> = {
-  '/diaspora': 'Dashboard',
-  '/diaspora/claims': 'Claims',
-  '/diaspora/wallet': 'Wallet',
-  '/diaspora/topup-wallet': 'Wallet',
-  '/diaspora/link-kin': 'Linked Kin',
-  '/diaspora/bank-cards': 'Bank & Cards',
-  '/diaspora/auto-approval': 'Auto-Approval',
-  '/diaspora/review-claim': 'Review Claim',
-  '/diaspora/payment-successful': 'Payment',
-  '/diaspora/approval-success': 'Auto-Approval',
-  '/diaspora/settings': 'Settings',
+  '/family': 'Dashboard',
+  '/family/raise-claim': 'Raise Claim',
+  '/family/my-claim': 'My Claims',
+  '/family/payment-claim': 'Raise Claim',
+  '/family/success': 'Raise Claim',
+  '/family/settings': 'Settings',
 };
 
-export default function DiasporaLayout({
+export default function FamilyLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -35,7 +30,7 @@ export default function DiasporaLayout({
     <div className={`${inter.className} flex h-screen w-full overflow-hidden bg-[#F8F9FA] text-[#252A3A] antialiased`}>
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       <div className="flex-1 h-full overflow-y-auto flex flex-col min-w-0">
-        <Header title={title} onMenuToggle={() => setSidebarOpen(true)} />
+        <Header title={title} userName="Ngozi" userRole="Family · Lagos" onMenuToggle={() => setSidebarOpen(true)} />
         <main className="flex-1">
           {children}
         </main>

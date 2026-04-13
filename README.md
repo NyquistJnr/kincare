@@ -31,7 +31,7 @@ layer that flags suspicious invoices before any payment is approved.
 
 - Allows diaspora members to pre-fund a wallet dedicated solely to medical
   emergencies
-- Ensures payment goes directly to the hospital — money never touches the
+- Ensures payment goes directly to the hospital. Money never touches the
   family member's hands
 - Enables instant settlement to any Nigerian hospital bank account via
   Interswitch
@@ -61,31 +61,29 @@ layer that flags suspicious invoices before any payment is approved.
 
 ## Key Features
 
-- **Pre-funded health wallet** — money set aside before emergencies happen,
+- **Pre-funded health wallet**: money set aside before emergencies happen,
   not after
-- **Direct hospital settlement** — Interswitch transfers funds straight to the
+- **Direct hospital settlement**: Interswitch transfers funds straight to the
   hospital's bank account
-- **AI bill anomaly detection** — flags invoices that are statistical outliers
+- **AI bill anomaly detection**: flags invoices that are statistical outliers
   before approval
-- **Claim approval intelligence** — plain-English AI brief shown to diaspora
+- **Claim approval intelligence**: plain-English AI brief shown to diaspora
   member at the approval screen
-- **Auto-approval rules** — configurable fallback so emergencies are covered
+- **Auto-approval rules**: configurable fallback so emergencies are covered
   even when the diaspora member is unreachable
-- **Pairing code family linking** — diaspora member generates a unique code;
+- **Pairing code family linking**: diaspora member generates a unique code;
   family member uses it to connect to the wallet in minutes
-- **Account name verification** — Interswitch resolves hospital account numbers
+- **Account name verification**: Interswitch resolves hospital account numbers
   to verified account names before any payment moves
 
 ---
 
 ## Tech Stack
 
-_(To be completed by development team)_
-
-- **Frontend:** [Framework]
-- **Backend:** [Language / Framework]
-- **Database:** [Database]
-- **Hosting:** [Platform — Vercel / Netlify / AWS]
+- **Frontend:** NextJs, Tailwind CSS, Typescript
+- **Backend:** Django, Python
+- **Database:** Postgres DB
+- **Hosting:** Vercel
 
 ---
 
@@ -143,7 +141,16 @@ funding through to hospital payment confirmation.
 
 ### Chidinma Njoku — Frontend Developer
 
-- _(Chidinma to complete with specific features built)_
+- Built the complete diaspora member dashboard — wallet overview, claims list, claim review, top-up wallet, linked kin management, bank & cards, and auto-approval configuration
+- Built the family member dashboard — raise claim flow, my claims list, payment confirmation, and success screens
+- Built the admin dashboard — system overview with stats, recent claims table, and settings
+- Implemented the full onboarding flow — role selection, diaspora registration, email verification, PIN setup, payment method linking, and family member wallet pairing
+- Created a responsive sidebar navigation system with mobile hamburger menu, slide-in drawer overlay, and close-on-outside-click behaviour across all three dashboard contexts
+- Built a reusable settings page component shared across diaspora, family, and admin dashboards
+- Implemented AI claim brief and cost anomaly detection UI on the claim review screen
+- Built the auto-approval rules configuration interface with toggle controls and threshold settings
+- Made all pages fully mobile responsive with adaptive layouts, padding, typography, and grid breakpoints
+- Integrated PIN entry keypad with live dot indicators for the security setup screens
 
 ### Pedro Obi — Frontend Developer
 
